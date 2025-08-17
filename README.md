@@ -49,10 +49,10 @@ It simulates real-world API workflows such as CRUD operations, authentication, e
 
 ---
 
-## 👤 Author
-
-**D Akshaykumar**  
-🔗 LinkedIn
-🔗 GitHub
+## 👨‍💻 Author & Contact
+- **Name:** D Akshaykumar  
+- 📧 d.akshaykumar17@gmail.com  
+- 🔗 [LinkedIn](https://linkedin.com)  
+- 🔗 [GitHub](https://github.com/Akshay17DS)
 
 ---
