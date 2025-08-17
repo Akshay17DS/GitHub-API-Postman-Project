@@ -1,0 +1,596 @@
+{
+	"info": {
+		"_postman_id": "2018b1cc-e2ef-40d3-9477-b0df8e9c2ef8",
+		"name": "GitHub API Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47265078",
+		"_collection_link": "https://d-akshaykumar17-887452.postman.co/workspace/Akshay~832dd99e-7171-473e-a43b-6d88f95836ce/collection/47265078-2018b1cc-e2ef-40d3-9477-b0df8e9c2ef8?action=share&source=collection_link&creator=47265078"
+	},
+	"item": [
+		{
+			"name": "CRUD",
+			"item": [
+				{
+					"name": "List My Repos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/repos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"repos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Repo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"api-demo-repo\",\r\n  \"description\": \"Test repo created via GitHub API from Postman\",\r\n  \"private\": false\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/repos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"repos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Repo Description",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"api-demo-repo\",\r\n  \"description\": \"Updated description via GitHub API\",\r\n  \"private\": false\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/repos/{{username}}/api-demo-repo",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"repos",
+								"{{username}}",
+								"api-demo-repo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Repo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/repos/{{username}}/api-demo-repo",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"repos",
+								"{{username}}",
+								"api-demo-repo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Query Params & Sorting",
+			"item": [
+				{
+					"name": "Sort my repos by name (A→Z)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.github.com/user/repos?sort=full name&direction=asc",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"user",
+								"repos"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "full name"
+								},
+								{
+									"key": "direction",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sort my repos by creation date (newest first)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.github.com/user/repos?sort=created&direction=desc",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"user",
+								"repos"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "created"
+								},
+								{
+									"key": "direction",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show only public repos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.github.com/user/repos?visibility=public",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"user",
+								"repos"
+							],
+							"query": [
+								{
+									"key": "visibility",
+									"value": "public"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Combine sort + filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.github.com/user/repos?sort=updated&direction=desc&visibility=public",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"user",
+								"repos"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "updated"
+								},
+								{
+									"key": "direction",
+									"value": "desc"
+								},
+								{
+									"key": "visibility",
+									"value": "public"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication & Error Handling",
+			"item": [
+				{
+					"name": "Without Token - Unauthorized",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/repos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"repos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid Token - Unauthorized",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "abcdefghijklmnopqrstuvwxyz",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/repos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"repos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Valid Token - Authorized",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/repos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"repos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Rate Limit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/rate_limit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"rate_limit"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pagination & Chaining",
+			"item": [
+				{
+					"name": "List Repos — page 1 (per_page=2)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let linkHeader = pm.response.headers.get(\"Link\");\r",
+									"if (linkHeader) {\r",
+									"    let nextLinkMatch = linkHeader.match(/<([^>]+)>;\\s*rel=\"next\"/);\r",
+									"    if (nextLinkMatch) {\r",
+									"        pm.environment.set(\"nextPageUrl\", nextLinkMatch[1]);\r",
+									"    }\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/repos?per_page=2&page=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"repos"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Repos – Page 2 (via next link)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{nextPageUrl}}",
+							"host": [
+								"{{nextPageUrl}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chained Requests",
+			"item": [
+				{
+					"name": "Get My User Info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\r",
+									"\r",
+									"let json = {};\r",
+									"try {\r",
+									"  json = pm.response.json();\r",
+									"} catch (e) {\r",
+									"  pm.test(\"Response is valid JSON\", () => pm.expect(false).to.be.true);\r",
+									"}\r",
+									"\r",
+									"// Save useful fields into environment variables for chaining\r",
+									"if (json && json.login) {\r",
+									"  pm.environment.set(\"user_login\", json.login);\r",
+									"  pm.test(\"Saved user_login\", () => pm.expect(pm.environment.get(\"user_login\")).to.be.a(\"string\"));\r",
+									"}\r",
+									"if (json && json.id) {\r",
+									"  pm.environment.set(\"user_id\", String(json.id));\r",
+									"  pm.test(\"Saved user_id\", () => pm.expect(pm.environment.get(\"user_id\")).to.match(/^\\d+$/));\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Repos — by user login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\r",
+									"\r",
+									"let json = [];\r",
+									"try {\r",
+									"  json = pm.response.json();\r",
+									"} catch (e) {\r",
+									"  pm.test(\"Response is JSON array\", () => pm.expect(false).to.be.true);\r",
+									"}\r",
+									"\r",
+									"// Ensure results are for the right user\r",
+									"const login = pm.environment.get(\"user_login\");\r",
+									"if (Array.isArray(json) && login) {\r",
+									"  pm.test(\"All repo full_names include the user login\", () => {\r",
+									"    json.forEach(repo => pm.expect(repo.full_name).to.match(new RegExp(`^${login}/`)));\r",
+									"  });\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/{{user_login}}/repos?per_page=2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{user_login}}",
+								"repos"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Automation & Tests",
+			"item": [
+				{
+					"name": "Create Repo with Dynamic Name",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Generate a dynamic repo name\r",
+									"let repoName = \"demo-repo-\" + Date.now();\r",
+									"pm.environment.set(\"dynamicRepo\", repoName);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Repo created successfully\", function () {\r",
+									"    pm.response.to.have.status(201);   // Check status code\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Repo name matches dynamic variable\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(pm.variables.get(\"dynamicRepo\"));\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{dynamicRepo}}\",\r\n  \"description\": \"Created with dynamic name using pre-request script\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.github.com/user/repos",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"user",
+								"repos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{GITHUB_TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
